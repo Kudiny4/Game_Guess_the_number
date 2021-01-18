@@ -1,0 +1,38 @@
+import random
+
+number = random.randint(1, 100)
+#print(number)
+user_number = None
+count = 0
+levels = {1:10, 2:5, 3:3}
+level = int(input('Введите уровень сложности:  '))
+
+users = []
+users_count = int(input('Введите количество пользователей:  '))
+for i in range(users_count):
+    users.append(input(f'Введите имя {i+1} пользователя:   '))
+print('В игре участвуют:', users)
+
+is_winner = False
+winner_name = None
+
+max_count = levels[level]
+while not is_winner:
+    count += 1
+    if count > max_count:
+        print('Проиграли все игроки! Использовано максимальное количество попыток!')
+        break
+    print(f'Попытка № {count}')
+    for player in users:
+        print(f'Ход игрока {player}')
+        user_number = int(input('Введите число:   '))
+        if user_number == number:
+            is_winner = True
+            winner_name = player
+            break
+        elif user_number < number:
+            print('Бери Больше!')
+        else:
+            print('Бери меньше!')
+else:
+    print(f'Бинго! {winner_name} угадал с {count} попытки!')
